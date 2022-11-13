@@ -6,7 +6,7 @@ This project is a basic invoice management system to create and manage informati
 
 ## Screenshots
 
-![alt text](https://github.com/truonghoangthuan/django-invoice-management/blob/master/screenshots/home.png)
+![alt text](https://gitlab.com/EliasFranco97/sistema_de_punto_de_venta/-/blob/main/screenshots/home.png)
 
 ## Usage
 
