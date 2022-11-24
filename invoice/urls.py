@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+
 
 urlpatterns = [
     path('', views.create_invoice, name='home'),
@@ -19,4 +20,6 @@ urlpatterns = [
     path('delete_invoice/<int:pk>/', views.delete_invoice, name='delete_invoice'),
 
     path('view_invoice_detail/<int:pk>/', views.view_invoice_detail, name='view_invoice_detail'),
+
+    #path('accounts/', include('django.contrib.auth.urls'))
 ]
