@@ -308,3 +308,8 @@ def delete_product(request, pk):
     }
 
     return render(request, "invoice/delete_product.html", context)
+
+
+# iniciar sesion
+def iniciarSesion(request):
+    return redirect("login")
