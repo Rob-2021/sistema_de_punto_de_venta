@@ -1,10 +1,16 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.db import IntegrityError
+from django.contrib.auth.decorators import login_required
 
 from .forms import *
 from .models import *
 
 
 # Create your views here.
+@login_required
 def base(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -20,6 +26,7 @@ def base(request):
 
 
 # Product view
+@login_required
 def create_product(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -42,7 +49,7 @@ def create_product(request):
 
     return render(request, "invoice/create_product.html", context)
 
-
+@login_required
 def view_product(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -61,6 +68,7 @@ def view_product(request):
 
 
 # Customer view
+@login_required
 def create_customer(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -83,7 +91,7 @@ def create_customer(request):
 
     return render(request, "invoice/create_customer.html", context)
 
-
+@login_required
 def view_customer(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -102,6 +110,7 @@ def view_customer(request):
 
 
 # Invoice view
+@login_required
 def create_invoice(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -153,7 +162,7 @@ def create_invoice(request):
 
     return render(request, "invoice/create_invoice.html", context)
 
-
+@login_required
 def view_invoice(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -172,6 +181,7 @@ def view_invoice(request):
 
 
 # Detail view of invoices
+@login_required
 def view_invoice_detail(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -192,6 +202,7 @@ def view_invoice_detail(request, pk):
 
 
 # Delete invoice
+@login_required
 def delete_invoice(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -216,6 +227,7 @@ def delete_invoice(request, pk):
 
 
 # Edit customer
+@login_required
 def edit_customer(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -241,6 +253,7 @@ def edit_customer(request, pk):
 
 
 # Delete customer
+@login_required
 def delete_customer(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -263,6 +276,7 @@ def delete_customer(request, pk):
 
 
 # Edit product
+@login_required
 def edit_product(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -288,6 +302,7 @@ def edit_product(request, pk):
 
 
 # Delete product
+@login_required
 def delete_product(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -313,3 +328,74 @@ def delete_product(request, pk):
 # iniciar sesion
 def iniciarSesion(request):
     return redirect("login")
+
+# registrar 
+# def registrar(request):
+#     return render(request, 'invoice/registrar.html')
+
+@login_required
+def registrar(request):
+
+    if request.method == 'GET':
+        return render(request, 'invoice/registrar.html', {
+            'form': UserCreationForm
+        }) 
+    else:
+        if request.POST['password1'] == request.POST['password2']:
+            # register user
+            try:
+                user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
+                user.save()
+                login(request, user)
+                return redirect('ver_usuarios')
+            except IntegrityError:
+                return render(request, 'invoice/registrar.html', {
+                    'form': UserCreationForm, 
+                    'error': 'user already exists'
+                }) 
+             
+        return render(request, 'invoice/registrar.html', {
+                    'form': UserCreationForm, 
+                    'error': 'Password do no match'
+        }) 
+
+
+@login_required
+def ver_usuarios(request):
+    total_product = Product.objects.count()
+    total_customer = Customer.objects.count()
+    total_invoice = Invoice.objects.count()
+
+    usuarios = User.objects.all()
+
+    context = {
+        "total_product": total_product,
+        "total_customer": total_customer,
+        "total_invoice": total_invoice,
+        "usuarios": usuarios,
+    }
+
+    return render(request, "invoice/ver_usuarios.html", context)
+
+
+# Delete usuario
+@login_required
+def eliminar_usuario(request, pk):
+    total_product = Product.objects.count()
+    total_customer = Customer.objects.count()
+    total_invoice = Invoice.objects.count()
+
+    usuario = User.objects.get(id=pk)
+
+    if request.method == "POST":
+        usuario.delete()
+        return redirect("ver_usuarios")
+
+    context = {
+        "total_product": total_product,
+        "total_customer": total_customer,
+        "total_invoice": total_invoice,
+        "usuario": usuario,
+    }
+
+    return render(request, "invoice/eliminar_usuario.html", context)
