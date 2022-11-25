@@ -102,6 +102,50 @@
                 </div>
             </li>
 
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities1"
+                    aria-expanded="true" aria-controls="collapseUtilities1">
+                    <i class="fas fa-user-circle"></i>
+                    <span>usuarios</span>
+                </a>
+                <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtils1"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{% url 'registrar' %}">Add</a>
+                        <a class="collapse-item" href="{% url 'ver_usuarios' %}">View</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- <li class="nav-item">
+                <a class="nav-link collapsed" href="#" 
+                    aria-expanded="true" aria-controls="collapseUtilities3">
+                    <i class="fas fa-user-circle"></i>
+                    <span>usuarios</span>
+                </a>
+
+
+                
+
+
+            </li> -->
+
+
+            {% if user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'logout' %}">
+                    <!-- <i class="fas fa-cash-register"></i> -->
+                    <!-- <i class="bi bi-door-closed"></i> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 16 16">
+                        <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                        <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+                      </svg>
+                    <span>Hola: @{{ user.username }}<br>Cerrar Sesión</span></a>
+            </li>
+            {% endif %}
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -110,12 +154,7 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <!-- Sidebar Message -->
-            <div class="sidebar-card">
-                <img class="sidebar-card-illustration mb-2" src="{% static 'img/undraw_rocket.svg' %}" alt="">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
+            
 
         </ul>
         <!-- End of Sidebar -->

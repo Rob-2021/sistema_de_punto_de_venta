@@ -21,5 +21,9 @@ urlpatterns = [
 
     path('view_invoice_detail/<int:pk>/', views.view_invoice_detail, name='view_invoice_detail'),
 
-    #path('accounts/', include('django.contrib.auth.urls'))
+    path('registrar/', views.registrar , name='registrar'),
+    path('ver_usuarios/', views.ver_usuarios , name='ver_usuarios'),
+    path('eliminar_usuario/<int:pk>/', views.eliminar_usuario, name='eliminar_usuario'),
+
+
 ]
