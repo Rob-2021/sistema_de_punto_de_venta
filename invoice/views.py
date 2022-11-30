@@ -5,8 +5,18 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 
+from django.urls import reverse_lazy
+
 from .forms import *
 from .models import *
+
+import os
+from django.conf import settings
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import Context
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+#from django.contrib.staticfiles import finders
 
 
 # Create your views here.
@@ -399,3 +409,37 @@ def eliminar_usuario(request, pk):
     }
 
     return render(request, "invoice/eliminar_usuario.html", context)
+
+
+
+#class SaleFacturaPdf(View):
+    
+ #   def get(self, request, *args, **kwargs):
+  #      return HttpResponse('Hello, World')
+
+def generar_pdf(request, pk):
+    try:
+        template = get_template('invoice/view_reportpfd.html')
+        invoice = Invoice.objects.get(id=pk)
+        invoice_detail = InvoiceDetail.objects.filter(invoice=invoice)
+        context = {
+            'factura': invoice.id,
+            'cliente': invoice.customer,
+            'fecha': invoice.date,
+            'comp': {'name': 'Mi Tienda', 'ruc': '344754238694', 'address': 'Sucre - Bolivia'},
+            "invoice_detail": invoice_detail,
+            "iva": invoice.total*0.13,
+            "total_invoice": invoice.total,
+            "total": invoice.total - invoice.total*0.13,
+        }
+        html = template.render(context)
+        response = HttpResponse(content_type='application/pdf')
+        #response['Content-Disposition'] = 'attachment; filename="report.pdf'
+        pisaStatus = pisa.CreatePDF(
+            html, dest=response)
+        #if pisaStatus.err:
+         #   return HttpResponse('We had some errors <pre>' + html+ '</pre>')
+        return response
+    except:
+        pass
+    return HttpResponse('Error al crear la factura')

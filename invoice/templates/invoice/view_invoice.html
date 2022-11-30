@@ -21,6 +21,7 @@
                             <th>Total</th>
                             <th>Detail</th>
                             <th>Delete</th>
+                            <th>Imprimir Factura</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,6 +49,12 @@
                                 <a href="{% url 'delete_invoice' i.id %}" class="btn btn-outline-danger"
                                    style="width: 100%; height: 100%; border-radius: 0">
                                     <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                            <td style="padding: 0;">
+                                <a href="{% url 'generar_pdf' i.id %}" class="btn btn-outline-warning"
+                                   style="width: 100%; height: 100%; border-radius: 0" target="_blanck">
+                                   <i class="fas fa-sharp fa-solid fa-print"></i>
                                 </a>
                             </td>
                         {% endfor %}

@@ -25,5 +25,5 @@ urlpatterns = [
     path('ver_usuarios/', views.ver_usuarios , name='ver_usuarios'),
     path('eliminar_usuario/<int:pk>/', views.eliminar_usuario, name='eliminar_usuario'),
 
-
+    path('pdf/<int:pk>/', views.generar_pdf, name='generar_pdf' )
 ]
