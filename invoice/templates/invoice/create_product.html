@@ -1,6 +1,21 @@
 {% extends "invoice/base/base.html" %}
 <!-- Content Row -->
 {% block content %}
+
+{% if messages %}
+<div class="alert alert-success d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+    {% for message in messages %}
+    <div>
+        
+        {% if message.tags %}
+        {{ message }}
+        {% endif %}
+        
+    </div>
+    {% endfor %}
+  </div>    
+{% endif %}
 <div class="row">
     <!-- Area Chart -->
     <div class="col-xl-12 col-lg-7">

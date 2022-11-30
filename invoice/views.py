@@ -18,6 +18,7 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 #from django.contrib.staticfiles import finders
 
+from django.contrib import messages
 
 # Create your views here.
 @login_required
@@ -47,7 +48,9 @@ def create_product(request):
     if request.method == "POST":
         product = ProductForm(request.POST)
         if product.is_valid():
+            
             product.save()
+            messages.success(request, 'Producto Guardado')
             return redirect("create_product")
 
     context = {
@@ -430,7 +433,7 @@ def generar_pdf(request, pk):
             "invoice_detail": invoice_detail,
             "iva": invoice.total*0.13,
             "total_invoice": invoice.total,
-            "total": invoice.total - invoice.total*0.13,
+            "total": invoice.total + invoice.total*0.13,
         }
         html = template.render(context)
         response = HttpResponse(content_type='application/pdf')
