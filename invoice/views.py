@@ -26,6 +26,10 @@ def base(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
     total_invoice = Invoice.objects.count()
+    invoice = Invoice.objects.all()
+
+    # for i in invoice.total_invoice:
+    #     i = i + 0
 
     context = {
         "total_product": total_product,
