@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import formset_factory
+from django.utils.translation import gettext_lazy as _
 
 from .models import *
 
@@ -16,18 +17,18 @@ class ProductForm(forms.ModelForm):
             'product_name': forms.TextInput(attrs={
                 'class': 'form-control',
                 'id': 'product_name',
-                'placeholder': 'Enter name of the product',
+                'placeholder': _('Enter name of the product'),
             }),
             'product_price': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'id': 'product_price',
-                'placeholder': 'Enter price of the product',
+                'placeholder': _('Enter price of the product'),
                 'type': 'number',
             }),
             'product_unit': forms.TextInput(attrs={
                 'class': 'form-control',
                 'id': 'product_unit',
-                'placeholder': 'Enter unit of the product',
+                'placeholder': _('Enter unit of the product'),
             }),
         }
 
@@ -44,7 +45,7 @@ class CustomerForm(forms.ModelForm):
             'customer_name': forms.TextInput(attrs={
                 'class': 'form-control',
                 'id': 'customer_name',
-                'placeholder': 'Enter name of the customer',
+                'placeholder': _('Enter name of the customer'),
             }),
             'customer_gender': forms.Select(attrs={
                 'class': 'form-control',
@@ -75,7 +76,7 @@ class InvoiceForm(forms.ModelForm):
             'date': forms.DateInput(attrs={
                 'class': 'form-control',
                 'id': 'invoice_date',
-                'placeholder': 'Enter date create',
+                'placeholder': _('Enter date create'),
                 'type': 'date',
                 'name': 'invoice_date',
             }),

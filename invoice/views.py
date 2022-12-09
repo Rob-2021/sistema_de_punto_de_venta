@@ -18,6 +18,8 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 #from django.contrib.staticfiles import finders
 
+from django.utils.translation import gettext_lazy as _
+
 from django.contrib import messages
 
 # Create your views here.

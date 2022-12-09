@@ -1,24 +1,27 @@
 {% extends "invoice/base/base.html" %}
-<!-- Content Row -->
+
+{% load i18n %}
+
 {% block content %}
+<!-- Content Row -->
 <div class="row">
     <!-- Area Chart -->
     <div class="col-xl-12 col-lg-7">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <label class="m-0 font-weight-bold text-primary">Create invoice</label>
+                <label class="m-0 font-weight-bold text-primary">{% trans 'Create invoice' %}</label>
             </div>
             <!-- Card Body -->
             <div class="card-body">
                 <form method="post" action="">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label class="form-label" for="invoice_date">Date</label>
+                        <label class="form-label" for="invoice_date">{% trans 'Date' %}</label>
                         {{form.date}}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="invoice_customer_name">Customer name</label>
+                        <label class="form-label" for="invoice_customer_name">{% trans 'Customer name' %}</label>
                         {{form.customer}}
                     </div>
                     {{ formset.management_form }}
@@ -27,11 +30,11 @@
                         <table class="table">
                             <tr>
                                 <td style="border: 0; padding: 0 0.5em 0 0; width: 80%">
-                                    <label class="form-label" for="invoice_detail_product">Product name</label>
+                                    <label class="form-label" for="invoice_detail_product">{% trans 'Product name' %}</label>
                                     {{form.product}}
                                 </td>
                                 <td style="border: 0; padding: 0 0 0 0.5em;">
-                                    <label class="form-label" for="invoice_detail_amount">Amounts</label>
+                                    <label class="form-label" for="invoice_detail_amount">{% trans 'Amounts' %}</label>
                                     {{form.amount}}
                                 </td>
                             </tr>

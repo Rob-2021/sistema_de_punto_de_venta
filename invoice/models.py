@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 # Create your models here.
@@ -14,9 +15,9 @@ class Product(models.Model):
 
 class Customer(models.Model):
     GENDER_CHOICES = (
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-        ('Others', 'Others'),
+        ('Male', _('Male')),
+        ('Female', _('Female')),
+        ('Others', _('Others')),
     )
     customer_name = models.CharField(max_length=255)
     customer_gender = models.CharField(max_length=50, choices=GENDER_CHOICES)

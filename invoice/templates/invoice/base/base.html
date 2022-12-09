@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% load i18n %}
+
 {% load static %}
 
 <head>
@@ -11,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Invoice Management</title>
+    <title>{% trans 'Invoice Management' %}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{% static '/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -40,7 +42,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">MY STORE</div>
+                <div class="sidebar-brand-text mx-3">{% trans 'MY STORE' %}</div>
             </a>
 
             <!-- Divider -->
@@ -50,7 +52,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'create_invoice' %}">
                     <i class="fas fa-cash-register"></i>
-                    <span>Create Invoice</span></a>
+                    <span>{% trans 'Create Invoice' %}</span></a>
             </li>
 
             <!-- Divider -->
@@ -61,12 +63,12 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-folder-open"></i>
-                    <span>Products</span>
+                    <span>{% trans 'Products' %}</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{% url 'create_product' %}">Add</a>
-                        <a class="collapse-item" href="{% url 'view_product' %}">View</a>
+                        <a class="collapse-item" href="{% url 'create_product' %}">{% trans 'Add' %}</a>
+                        <a class="collapse-item" href="{% url 'view_product' %}">{% trans 'View' %}</a>
                     </div>
                 </div>
             </li>
@@ -76,13 +78,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-user-circle"></i>
-                    <span>Customers</span>
+                    <span>{% trans 'Customers' %}</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtils"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{% url 'create_customer' %}">Add</a>
-                        <a class="collapse-item" href="{% url 'view_customer' %}">View</a>
+                        <a class="collapse-item" href="{% url 'create_customer' %}">{% trans 'Add' %}</a>
+                        <a class="collapse-item" href="{% url 'view_customer' %}">{% trans 'View' %}</a>
                     </div>
                 </div>
             </li>
@@ -92,12 +94,12 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-cart-plus"></i>
-                    <span>Invoices</span>
+                    <span>{% trans 'Invoices' %}</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{% url 'create_invoice' %}">Add</a>
-                        <a class="collapse-item" href="{% url 'view_invoice' %}">View</a>
+                        <a class="collapse-item" href="{% url 'create_invoice' %}">{% trans 'Add' %}</a>
+                        <a class="collapse-item" href="{% url 'view_invoice' %}">{% trans 'View' %}</a>
                     </div>
                 </div>
             </li>
@@ -107,13 +109,13 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities1"
                     aria-expanded="true" aria-controls="collapseUtilities1">
                     <i class="fas fa-user-circle"></i>
-                    <span>usuarios</span>
+                    <span>{% trans 'Users' %}</span>
                 </a>
                 <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtils1"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{% url 'registrar' %}">Add</a>
-                        <a class="collapse-item" href="{% url 'ver_usuarios' %}">View</a>
+                        <a class="collapse-item" href="{% url 'registrar' %}">{% trans 'Add' %}</a>
+                        <a class="collapse-item" href="{% url 'ver_usuarios' %}">{% trans 'View' %}</a>
                     </div>
                 </div>
             </li>
@@ -143,7 +145,7 @@
                         <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
                       </svg>
                       {% comment %} <i class="fas fa-sharp fa-solid fa-user"></i> {% endcomment %}
-                    <span>Hola: @{{ user.username }}<br>Cerrar Sesión</span></a>
+                    <span>{% trans 'Hello:' %} @{{ user.username }}<br>{% trans 'Logout' %}</span></a>
             </li>
             {% endif %}
 
@@ -187,7 +189,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Total products
+                                                {% trans 'Total products' %}
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_product}}</div>
                                         </div>
@@ -206,7 +208,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total customers
+                                                {% trans 'Total customers' %}
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_customer}}</div>
                                         </div>
@@ -224,7 +226,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total invoices</div>
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{% trans 'Total invoices' %}</div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
                                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{total_invoice}}</div>
@@ -246,7 +248,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Total income
+                                                {% trans 'Total income' %}
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">18000</div>
                                         </div>
@@ -273,7 +275,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; {% trans 'Your Website 2020' %}</span>
                     </div>
                 </div>
             </footer>
