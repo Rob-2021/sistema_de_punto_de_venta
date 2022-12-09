@@ -1,4 +1,7 @@
 {% extends "invoice/base/base.html" %}
+
+{% load i18n %}
+
 <!-- Content Row -->
 {% block content %}
 <div class="row">
@@ -7,22 +10,22 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <label class="m-0 font-weight-bold text-primary">Create customer</label>
+                <label class="m-0 font-weight-bold text-primary">{% trans 'Create customer' %}</label>
             </div>
             <!-- Card Body -->
             <div class="card-body">
                 <form method="post" action="">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label class="form-label" for="customer_name">Customer name</label>
+                        <label class="form-label" for="customer_name">{% trans 'Customer name' %}</label>
                         {{customer.customer_name}}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="customer_gender">Select gender</label>
+                        <label class="form-label" for="customer_gender">{% trans 'Select gender' %}</label>
                         {{customer.customer_gender}}
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="customer_dob">Date of birth</label>
+                        <label class="form-label" for="customer_dob">{% trans 'Date of birth' %}</label>
                         {{customer.customer_dob}}
                     </div>
                     <div class="mb-3">
