@@ -352,7 +352,7 @@ def iniciarSesion(request):
 # def registrar(request):
 #     return render(request, 'invoice/registrar.html')
 
-#@permission_required('invoice.add_user')
+@permission_required('invoice.add_user')
 def registrar(request):
 
     if request.method == 'GET':
@@ -379,7 +379,8 @@ def registrar(request):
         }) 
 
 
-@permission_required('invoice.view_user')
+#@permission_required('invoice.view_user')
+@login_required
 def ver_usuarios(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
