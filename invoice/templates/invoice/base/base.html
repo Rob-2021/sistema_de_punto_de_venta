@@ -50,9 +50,11 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
+                {% if perms.invoice.add_invoice %}
                 <a class="nav-link" href="{% url 'create_invoice' %}">
                     <i class="fas fa-cash-register"></i>
                     <span>{% trans 'Create Invoice' %}</span></a>
+                {% endif %}
             </li>
 
             <!-- Divider -->
@@ -67,8 +69,12 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        {% if perms.invoice.add_product %}
                         <a class="collapse-item" href="{% url 'create_product' %}">{% trans 'Add' %}</a>
+                        {% endif %}
+                        {% if perms.invoice.view_product %}
                         <a class="collapse-item" href="{% url 'view_product' %}">{% trans 'View' %}</a>
+                        {% endif %}
                     </div>
                 </div>
             </li>
@@ -83,8 +89,12 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtils"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        {% if perms.invoice.add_customer %}
                         <a class="collapse-item" href="{% url 'create_customer' %}">{% trans 'Add' %}</a>
+                        {% endif %}
+                        {% if perms.invoice.view_customer %}
                         <a class="collapse-item" href="{% url 'view_customer' %}">{% trans 'View' %}</a>
+                        {% endif %}
                     </div>
                 </div>
             </li>
@@ -98,13 +108,17 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        {% if perms.invoice.add_invoice %}
                         <a class="collapse-item" href="{% url 'create_invoice' %}">{% trans 'Add' %}</a>
+                        {% endif %}
+                        {% if perms.invoice.view_invoice %}
                         <a class="collapse-item" href="{% url 'view_invoice' %}">{% trans 'View' %}</a>
+                        {% endif %}
                     </div>
                 </div>
             </li>
 
-
+            {% if perms.invoice.add_user %}
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities1"
                     aria-expanded="true" aria-controls="collapseUtilities1">
@@ -114,11 +128,16 @@
                 <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtils1"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        {% if perms.invoice.add_user %}
                         <a class="collapse-item" href="{% url 'registrar' %}">{% trans 'Add' %}</a>
+                        {% endif %}
+                        {% if perms.invoice.view_user %}
                         <a class="collapse-item" href="{% url 'ver_usuarios' %}">{% trans 'View' %}</a>
+                        {% endif %}
                     </div>
                 </div>
             </li>
+            {% endif %}
 
 
             <!-- <li class="nav-item">
