@@ -352,7 +352,7 @@ def iniciarSesion(request):
 # def registrar(request):
 #     return render(request, 'invoice/registrar.html')
 
-@permission_required('invoice.add_user')
+#@permission_required('invoice.add_user')
 def registrar(request):
 
     if request.method == 'GET':
