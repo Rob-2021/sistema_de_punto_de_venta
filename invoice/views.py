@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 from django.urls import reverse_lazy
 
@@ -43,7 +43,7 @@ def base(request):
 
 
 # Product view
-@login_required
+@permission_required('invoice.add_product')
 def create_product(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -68,7 +68,7 @@ def create_product(request):
 
     return render(request, "invoice/create_product.html", context)
 
-@login_required
+@permission_required('invoice.view_product')
 def view_product(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -87,7 +87,7 @@ def view_product(request):
 
 
 # Customer view
-@login_required
+@permission_required('invoice.add_customer')
 def create_customer(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -110,7 +110,7 @@ def create_customer(request):
 
     return render(request, "invoice/create_customer.html", context)
 
-@login_required
+@permission_required('invoice.view_customer')
 def view_customer(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -181,7 +181,7 @@ def create_invoice(request):
 
     return render(request, "invoice/create_invoice.html", context)
 
-@login_required
+@permission_required('invoice.view_invoice')
 def view_invoice(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -200,7 +200,7 @@ def view_invoice(request):
 
 
 # Detail view of invoices
-@login_required
+@permission_required('invoice.view_invoice_detail')
 def view_invoice_detail(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -221,7 +221,7 @@ def view_invoice_detail(request, pk):
 
 
 # Delete invoice
-@login_required
+@permission_required('invoice.delete_invoice')
 def delete_invoice(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -246,7 +246,7 @@ def delete_invoice(request, pk):
 
 
 # Edit customer
-@login_required
+@permission_required('invoice.edit_customer')
 def edit_customer(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -272,7 +272,7 @@ def edit_customer(request, pk):
 
 
 # Delete customer
-@login_required
+@permission_required('invoice.delete_customer')
 def delete_customer(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -295,7 +295,7 @@ def delete_customer(request, pk):
 
 
 # Edit product
-@login_required
+@permission_required('invoice.edit_customer')
 def edit_product(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -321,7 +321,7 @@ def edit_product(request, pk):
 
 
 # Delete product
-@login_required
+@permission_required('invoice.delete_product')
 def delete_product(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -352,7 +352,7 @@ def iniciarSesion(request):
 # def registrar(request):
 #     return render(request, 'invoice/registrar.html')
 
-@login_required
+@permission_required('invoice.add_user')
 def registrar(request):
 
     if request.method == 'GET':
@@ -379,7 +379,7 @@ def registrar(request):
         }) 
 
 
-@login_required
+@permission_required('invoice.view_user')
 def ver_usuarios(request):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
@@ -398,7 +398,7 @@ def ver_usuarios(request):
 
 
 # Delete usuario
-@login_required
+@permission_required('invoice.delete_user')
 def eliminar_usuario(request, pk):
     total_product = Product.objects.count()
     total_customer = Customer.objects.count()
